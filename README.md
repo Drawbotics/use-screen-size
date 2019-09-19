@@ -1,30 +1,30 @@
-# Is Device Hook
+# Get Screen Size Hook
 
-This hook will use the breakpoints defined in `@drawbotics/drylus-style-vars` to identify the device the app is running in.
+This hook will use the breakpoints defined in `@drawbotics/drylus-style-vars` to identify screen size where the app is running.
 
 ## Installation
 
 ```bash
-$ npm install @drawbotics/use-is-device @drawbotics/drylus-style-vars
+$ npm install @drawbotics/use-screen-size @drawbotics/drylus-style-vars
 ```
 
 ## Usage
 
 ```js
-import { useIsDevice } from '@drawbotics/use-is-device';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 
 const App = ({ children }) => {
-  const { isPhonePortrait, isPhoneLandscape } = useIsDevice();
+  const { screenSize } = useScreenSize();
   return (
     <Page>
       {do {
-        if (isPhonePortrait) {
+        if (screenSize.large) {
           <Header />
         }
       }}
       {do {
-        if (isPhoneLandscape) {
+        if (screenSize.small) {
           <Sidebar />
         }
       }}
@@ -39,24 +39,58 @@ const App = ({ children }) => {
 export default App;
 ```
 
+### Order of conditions
+As with CSS `@media` queries, you have to check the screen size in the same order, i.e. from largest to smallest, otherwise the first one will always apply. This is because a `small` screen still falls within a `large` one, but not vice versa.
+
 ## Api
 
-The hook returns four properties:
+The hook returns one property `screenSize` which itself contains the following properties:
+- `isXs`: Always true, essentially because any screen will always match the extra small query
+- `isOnlyXs`: Only true for screens smaller than the defined value
+- `isS`: Any screen smaller than the defined `small` value
+- `isOnlyXs`: Only true if the screen size is larger than `Xs` but smaller than `S`
 
- - `isPhone`: The device is a phone in either landscape or portrait mode.
- - `isPhoneLandscape`: The device is a phone in landscape mode only.
- - `isPhonePortrait`: The device is a phone in portrait mode only.
- - `isDesktop`: The device is a desktop environment or has the size of a desktop environment.
+... and so on until `Huge`:
+```
+const { screenSize } = useScreenSize();
+const {
+  isXs,
+  isOnlyXs,
+  isS,
+  isOnlyS,
+  isM,
+  isOnlyM,
+  isL,
+  isOnlyL,
+  isXl,
+  isOnlyXl,
+  isHuge,
+  isOnlyHuge,
+} = screenSize;
+```
 
-There's also another utility function called `getDevice` that returns exactly the same value as the hook (it's actually used internally in the hook) but that won't update the value based on the resize events.
+There's also another utility function called `getScreenSize` that returns exactly the contents of the value returned by the hook (properties of `screenSize`) (it's actually used internally in the hook) but that won't update the value based on the resize events.
 
 Example:
 
 ```js
-import { getDevice } from '@drawbotics/use-is-device';
+import { getScreenSize } from '@drawbotics/use-screen-size';
 
-console.log(getDevice());
+console.log(getScreenSize());
 
 // prints
-// { isPhone: true, isPhoneLandscape: true, isPhonePortrait: false, isDesktop: false };
+// {
+//   isXs,
+//   isOnlyXs,
+//   isS,
+//   isOnlyS,
+//   isM,
+//   isOnlyM,
+//   isL,
+//   isOnlyL,
+//   isXl,
+//   isOnlyXl,
+//   isHuge,
+//   isOnlyHuge,
+// }
 ```

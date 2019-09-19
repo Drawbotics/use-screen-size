@@ -1,0 +1,48 @@
+{
+  "name": "@drawbotics/use-screen-size",
+  "version": "1.0.0",
+  "description": "Hook used to get the current screen size for responsive behaviour",
+  "main": "lib/index.js",
+  "author": "Nicolaos Moscholios <nick@drawbotics.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "clean": "rimraf lib/",
+    "build": "NODE_ENV=production babel src --out-dir lib/",
+    "test:watch": "BABEL_ENV=test jest --watch",
+    "prepublishOnly": "npm run clean && npm test && npm run build",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+  },
+  "peerDependencies": {
+    "@drawbotics/drylus-style-vars": "^4",
+    "react": "^16.8.x"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "@drawbotics/drylus-style-vars": "^4.0.0-alpha.4",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.4.0",
+    "eslint-formatter-pretty": "^2.1.1",
+    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.2.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-test-renderer": "^16.9.0"
+  }
+}

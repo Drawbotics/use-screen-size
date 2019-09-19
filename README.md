@@ -80,7 +80,7 @@ For anything larger than XL you should use the following condition:
   }
 ```
 
-### Order of conditions
+### Order of conditions
 As with CSS `@media` queries, you have to check the screen size in the same order, i.e. from largest to smallest, otherwise the first one will always apply. This is because a small screen still falls within a large one, but not vice versa.
 
 ---

@@ -15,16 +15,16 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 
 
 const App = ({ children }) => {
-  const { screenSize } = useScreenSize();
+  const { screenSize, ScreenSizes } = useScreenSize();
   return (
     <Page>
       {do {
-        if (screenSize.large) {
+        if (screenSize >= ScreenSizes.M) {
           <Header />
         }
       }}
       {do {
-        if (screenSize.small) {
+        if (screenSize < ScreenSizes.S) {
           <Sidebar />
         }
       }}
@@ -39,35 +39,51 @@ const App = ({ children }) => {
 export default App;
 ```
 
-### Order of conditions
-As with CSS `@media` queries, you have to check the screen size in the same order, i.e. from largest to smallest, otherwise the first one will always apply. This is because a `small` screen still falls within a `large` one, but not vice versa.
-
 ## Api
 
-The hook returns one property `screenSize` which itself contains the following properties:
-- `isXs`: Always true, essentially because any screen will always match the extra small query
-- `isOnlyXs`: Only true for screens smaller than the defined value
-- `isS`: Any screen smaller than the defined `small` value
-- `isOnlyXs`: Only true if the screen size is larger than `Xs` but smaller than `S`
+The hook returns two properties `screenSize` and `ScreenSizes`:
+- `screenSize` is equivalent to the current size of the screen following the current media query matching the size
+- `ScreenSizes` is a constant with the screen size value matching its size definition:
+```
+const ScreenSizes = {
+  XS: 1,
+  S: 2,
+  M: 3,
+  L: 4,
+  XL: 5,
+};
+```
 
-... and so on until `Huge`:
+This allows you to mimic the CSS way of writing queries, but in a more verbose way in JavaScript. You can use the comparative operators `<,=,>` to determine what should be rendered on the screen.
+
+If you want to render something when the screen is smaller or equal to a small size:
 ```
-const { screenSize } = useScreenSize();
-const {
-  isXs,
-  isOnlyXs,
-  isS,
-  isOnlyS,
-  isM,
-  isOnlyM,
-  isL,
-  isOnlyL,
-  isXl,
-  isOnlyXl,
-  isHuge,
-  isOnlyHuge,
-} = screenSize;
+  if (screenSize <= ScreenSizes.S) {
+    // Content for small screens and lower
+  }
+  else {
+    // Content for screens larger than small
+  }
 ```
+
+You can also target specific sizes with the `===` operator:
+```
+  if (screenSize === ScreenSizes.L) {
+    // Only render this content when the screen is L (smaller than XL and larger than S)
+  }
+```
+
+For anything larger than XL you should use the following condition:
+```
+  if (screnSize > ScreenSizes.XL) {
+    // Content for big screens
+  }
+```
+
+### Order of conditions
+As with CSS `@media` queries, you have to check the screen size in the same order, i.e. from largest to smallest, otherwise the first one will always apply. This is because a small screen still falls within a large one, but not vice versa.
+
+---
 
 There's also another utility function called `getScreenSize` that returns exactly the contents of the value returned by the hook (properties of `screenSize`) (it's actually used internally in the hook) but that won't update the value based on the resize events.
 
@@ -78,19 +94,6 @@ import { getScreenSize } from '@drawbotics/use-screen-size';
 
 console.log(getScreenSize());
 
-// prints
-// {
-//   isXs,
-//   isOnlyXs,
-//   isS,
-//   isOnlyS,
-//   isM,
-//   isOnlyM,
-//   isL,
-//   isOnlyL,
-//   isXl,
-//   isOnlyXl,
-//   isHuge,
-//   isOnlyHuge,
-// }
+// on medium screen prints
+3
 ```

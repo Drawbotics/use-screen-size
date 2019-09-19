@@ -21,163 +21,59 @@ describe('get-screen-size', () => {
     window.innerWidth = originalWidth;
   });
 
-  it('correctly recognises an extra small screen', () => {
+  it('correctly matches an extra small screen', () => {
     window.innerWidth = SCREEN_XS;
 
     const screenSize = getScreenSize();
-    expect(screenSize).toMatchObject({
-      isXs: true,
-      isOnlyXs: true,
-      isS: false,
-      isOnlyS: false,
-      isM: false,
-      isOnlyM: false,
-      isL: false,
-      isOnlyL: false,
-      isXl: false,
-      isOnlyXl: false,
-      isHuge: false,
-      isOnlyHuge: false,
-    });
+    expect(screenSize).toEqual(1);
   });
 
-  it('correctly recognises a small screen', () => {
+  it('correctly matches a small screen', () => {
     window.innerWidth = SCREEN_S;
 
     const screenSize = getScreenSize();
-    expect(screenSize).toMatchObject({
-      isXs: true,
-      isOnlyXs: false,
-      isS: true,
-      isOnlyS: true,
-      isM: false,
-      isOnlyM: false,
-      isL: false,
-      isOnlyL: false,
-      isXl: false,
-      isOnlyXl: false,
-      isHuge: false,
-      isOnlyHuge: false,
-    });
+    expect(screenSize).toEqual(2);
   });
 
-  it('correctly recognises an medium screen', () => {
+  it('correctly matches an medium screen', () => {
     window.innerWidth = SCREEN_M;
 
     const screenSize = getScreenSize();
-    expect(screenSize).toMatchObject({
-      isXs: true,
-      isOnlyXs: false,
-      isS: true,
-      isOnlyS: false,
-      isM: true,
-      isOnlyM: true,
-      isL: false,
-      isOnlyL: false,
-      isXl: false,
-      isOnlyXl: false,
-      isHuge: false,
-      isOnlyHuge: false,
-    });
+    expect(screenSize).toEqual(3);
   });
 
-  it('correctly recognises a large screen', () => {
+  it('correctly matches a large screen', () => {
     window.innerWidth = SCREEN_L;
 
     const screenSize = getScreenSize();
-    expect(screenSize).toMatchObject({
-      isXs: true,
-      isOnlyXs: false,
-      isS: true,
-      isOnlyS: false,
-      isM: true,
-      isOnlyM: false,
-      isL: true,
-      isOnlyL: true,
-      isXl: false,
-      isOnlyXl: false,
-      isHuge: false,
-      isOnlyHuge: false,
-    });
+    expect(screenSize).toEqual(4);
   });
 
-  it('correctly recognises an extra large screen', () => {
+  it('correctly matches an extra large screen', () => {
     window.innerWidth = SCREEN_XL;
 
     const screenSize = getScreenSize();
-    expect(screenSize).toMatchObject({
-      isXs: true,
-      isOnlyXs: false,
-      isS: true,
-      isOnlyS: false,
-      isM: true,
-      isOnlyM: false,
-      isL: true,
-      isOnlyL: false,
-      isXl: true,
-      isOnlyXl: true,
-      isHuge: false,
-      isOnlyHuge: false,
-    });
+    expect(screenSize).toEqual(5);
   });
   
-  it('correctly recognises a huge screen', () => {
+  it('correctly matches a huge screen', () => {
     window.innerWidth = SCREEN_HUGE;
 
     const screenSize = getScreenSize();
-    expect(screenSize).toMatchObject({
-      isXs: true,
-      isOnlyXs: false,
-      isS: true,
-      isOnlyS: false,
-      isM: true,
-      isOnlyM: false,
-      isL: true,
-      isOnlyL: false,
-      isXl: true,
-      isOnlyXl: false,
-      isHuge: true,
-      isOnlyHuge: true,
-    });
+    expect(screenSize).toBeGreaterThan(5);
   });
 
-  it('it recognises a miniscule screen as only XS', () => {
+  it('it correctly matches a miniscule screen', () => {
     window.innerWidth = SCREEN_MINISCULE;
 
     const screenSize = getScreenSize();
-    expect(screenSize).toMatchObject({
-      isXs: true,
-      isOnlyXs: true,
-      isS: false,
-      isOnlyS: false,
-      isM: false,
-      isOnlyM: false,
-      isL: false,
-      isOnlyL: false,
-      isXl: false,
-      isOnlyXl: false,
-      isHuge: false,
-      isOnlyHuge: false,
-    });
+    expect(screenSize).toEqual(1);
   });
 
-  it('it recognises a massive screen as only Huge', () => {
+  it('it matches a massive screen', () => {
     window.innerWidth = SCREEN_MASSIVE;
 
     const screenSize = getScreenSize();
-    expect(screenSize).toMatchObject({
-      isXs: true,
-      isOnlyXs: false,
-      isS: true,
-      isOnlyS: false,
-      isM: true,
-      isOnlyM: false,
-      isL: true,
-      isOnlyL: false,
-      isXl: true,
-      isOnlyXl: false,
-      isHuge: true,
-      isOnlyHuge: true,
-    });
+    expect(screenSize).toBeGreaterThan(5);
   });
 });

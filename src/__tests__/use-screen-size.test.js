@@ -6,25 +6,22 @@ import useScreenSize from '../use-screen-size';
 
 
 const TestComponent = () => {
-  const { screenSize } = useScreenSize();
+  const { screenSize, ScreenSizes } = useScreenSize();
   
-  if (screenSize.isHuge) {
-    return <div>isHuge</div>;
+  if (screenSize === ScreenSizes.M) {
+    return <div>mediumOnlyContent</div>;
   }
-  else if (screenSize.isXl) {
-    return <div>isXl</div>;
+  else if (screenSize >= ScreenSizes.M && screenSize <= ScreenSizes.XL) {
+    return <div>betweenMediumAndXLContent</div>;
   }
-  else if (screenSize.isL) {
-    return <div>isL</div>;
+  else if (screenSize <= ScreenSizes.S) {
+    return <div>smallContent</div>;
   }
-  else if (screenSize.isM) {
-    return <div>isM</div>;
+  else if (screenSize > ScreenSizes.XL) {
+    return <div>largerThanHugeContent</div>;
   }
-  else if (screenSize.isS) {
-    return <div>isS</div>;
-  }
-  else if (screenSize.isXs) {
-    return <div>isXs</div>;
+  else {
+    return <div>defaultContent</div>
   }
 };
 
@@ -37,7 +34,6 @@ describe('use-screen-size', () => {
   const SCREEN_S = 375;
   const SCREEN_M = 425;
   const SCREEN_L = 768;
-  const SCREEN_XL = 1024;
   const SCREEN_HUGE = 1200;
 
   beforeEach(() => {
@@ -52,57 +48,48 @@ describe('use-screen-size', () => {
     window.innerWidth = originalWidth;
   });
 
-  it('detects if the screen is extra small', () => {
+  it('renders content for screens smaller and equal to S', () => {
     window.innerWidth = SCREEN_XS;
 
     act(() => { ReactDOM.render(<TestComponent />, container) });
 
     const rootDiv = container.querySelector('div');
-    expect(rootDiv.textContent).toBe('isXs');
+    expect(rootDiv.textContent).toBe('smallContent');
   });
 
-  it('detects if the screen is small', () => {
-    window.innerWidth = SCREEN_S;
-
-    act(() => { ReactDOM.render(<TestComponent />, container) });
-
-    const rootDiv = container.querySelector('div');
-    expect(rootDiv.textContent).toBe('isS');
-  });
-
-  it('detects if the screen is medium', () => {
+  it('renders content for screens equal to M size (between S (excl) and M (incl) when size is M', () => {
     window.innerWidth = SCREEN_M;
 
     act(() => { ReactDOM.render(<TestComponent />, container) });
 
     const rootDiv = container.querySelector('div');
-    expect(rootDiv.textContent).toBe('isM');
+    expect(rootDiv.textContent).toBe('mediumOnlyContent');
   });
 
-  it('detects if the screen is large', () => {
+  it('does not render content for screens equal to M size (between S (excl) and M (incl) when size is S', () => {
+    window.innerWidth = SCREEN_S;
+
+    act(() => { ReactDOM.render(<TestComponent />, container) });
+
+    const rootDiv = container.querySelector('div');
+    expect(rootDiv.textContent).not.toBe('mediumOnlyContent');
+  });
+
+  it('renders content between two sizes', () => {
     window.innerWidth = SCREEN_L;
 
     act(() => { ReactDOM.render(<TestComponent />, container) });
 
     const rootDiv = container.querySelector('div');
-    expect(rootDiv.textContent).toBe('isL');
+    expect(rootDiv.textContent).toBe('betweenMediumAndXLContent');
   });
 
-  it('detects if the screen is extra large', () => {
-    window.innerWidth = SCREEN_XL;
-
-    act(() => { ReactDOM.render(<TestComponent />, container) });
-
-    const rootDiv = container.querySelector('div');
-    expect(rootDiv.textContent).toBe('isXl');
-  });
-
-  it('detects if the screen is huge', () => {
+  it('renders content for huge screens', () => {
     window.innerWidth = SCREEN_HUGE;
 
     act(() => { ReactDOM.render(<TestComponent />, container) });
 
     const rootDiv = container.querySelector('div');
-    expect(rootDiv.textContent).toBe('isHuge');
+    expect(rootDiv.textContent).toBe('largerThanHugeContent');
   });
 });

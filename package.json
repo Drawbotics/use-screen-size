@@ -12,6 +12,14 @@
     "prepublishOnly": "npm run clean && npm test && npm run build",
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drawbotics/use-screen-size"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

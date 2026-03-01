@@ -32,7 +32,7 @@
     "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty/index.js --max-warnings=0"
   },
   "peerDependencies": {
-    "@drawbotics/drylus-style-vars": "^4",
+    "@drawbotics/drylus-style-vars": ">=6",
     "react": "^16.8.x"
   },
   "devDependencies": {
@@ -42,7 +42,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
-    "@drawbotics/drylus-style-vars": "^4.0.0-alpha.4",
+    "@drawbotics/drylus-style-vars": "^8.0.0",
     "@eslint/js": "^10.0.1",
     "babel-jest": "^30.2.0",
     "eslint": "^9.39.3",

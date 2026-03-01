@@ -63,14 +63,14 @@ describe('get-screen-size', () => {
     expect(screenSize).toBeGreaterThan(5);
   });
 
-  it('it correctly matches a miniscule screen', () => {
+  it('correctly matches a miniscule screen', () => {
     window.innerWidth = SCREEN_MINISCULE;
 
     const screenSize = getScreenSize();
     expect(screenSize).toEqual(1);
   });
 
-  it('it matches a massive screen', () => {
+  it('matches a massive screen', () => {
     window.innerWidth = SCREEN_MASSIVE;
 
     const screenSize = getScreenSize();

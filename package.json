@@ -12,6 +12,9 @@
     "prepublishOnly": "npm run clean && npm test && npm run build",
     "test": "jest"
   },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Drawbotics/use-screen-size"
@@ -26,7 +29,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+    "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty/index.js --max-warnings=0"
   },
   "peerDependencies": {
     "@drawbotics/drylus-style-vars": "^4",
@@ -35,19 +38,21 @@
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
+    "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "@drawbotics/drylus-style-vars": "^4.0.0-alpha.4",
-    "babel-eslint": "^10.0.3",
-    "babel-jest": "^24.9.0",
-    "eslint": "^6.4.0",
-    "eslint-formatter-pretty": "^2.1.1",
-    "eslint-plugin-jest": "^22.17.0",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^2.0.1",
+    "@eslint/js": "^10.0.1",
+    "babel-jest": "^30.2.0",
+    "eslint": "^9.39.3",
+    "eslint-formatter-pretty": "^7.0.0",
+    "eslint-plugin-jest": "^29.15.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "husky": "^3.0.5",
-    "jest": "^24.9.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
     "lint-staged": "^9.2.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Drawbotics/use-screen-size"
+    "url": "git+https://github.com/Drawbotics/use-screen-size.git"
   },
   "publishConfig": {
     "access": "public",

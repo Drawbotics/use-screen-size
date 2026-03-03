@@ -33,7 +33,7 @@
   },
   "peerDependencies": {
     "@drawbotics/drylus-style-vars": ">=8.7.4",
-    "react": "^19.0.0"
+    "react": ">=16.8.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",

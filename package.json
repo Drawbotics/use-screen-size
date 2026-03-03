@@ -32,8 +32,8 @@
     "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty/index.js --max-warnings=0"
   },
   "peerDependencies": {
-    "@drawbotics/drylus-style-vars": ">=6",
-    "react": "^16.8.x"
+    "@drawbotics/drylus-style-vars": ">=8.7.4",
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",

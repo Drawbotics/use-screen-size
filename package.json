@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/use-screen-size",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Hook used to get the current screen size for responsive behaviour",
   "main": "lib/index.js",
   "author": "Nicolaos Moscholios <nick@drawbotics.com>",
@@ -32,7 +32,7 @@
     "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty/index.js --max-warnings=0"
   },
   "peerDependencies": {
-    "@drawbotics/drylus-style-vars": ">=8.7.4",
+    "@drawbotics/drylus-style-vars": ">=8.0.0",
     "react": ">=16.8.0"
   },
   "devDependencies": {

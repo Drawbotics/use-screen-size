@@ -7,29 +7,23 @@ function _parseMaxWidth(mediaQuery) {
 }
 
 
-function _parseMinWidth(mediaQuery) {
-  const [ , minWidth ] = mediaQuery.match(/min-width: (\d+)/);
-  return parseInt(minWidth);
-}
+const breakpoints = [
+  _parseMaxWidth(sv.screenXs),
+  _parseMaxWidth(sv.screenS),
+  _parseMaxWidth(sv.screenM),
+  _parseMaxWidth(sv.screenL),
+  _parseMaxWidth(sv.screenXl),
+];
 
 
 export default function getScreenSize() {
-  if (window.innerWidth <= _parseMaxWidth(sv.screenXs)) {
-    return 1;
+  const width = window.innerWidth;
+
+  for (let i = 0; i < breakpoints.length; i++) {
+    if (width <= breakpoints[i]) {
+      return i + 1;
+    }
   }
-  else if (window.innerWidth <= _parseMaxWidth(sv.screenS)) {
-    return 2;
-  }
-  else if (window.innerWidth <= _parseMaxWidth(sv.screenM)) {
-    return 3;
-  }
-  else if (window.innerWidth <= _parseMaxWidth(sv.screenL)) {
-    return 4;
-  }
-  else if (window.innerWidth <= _parseMaxWidth(sv.screenXl)) {
-    return 5;
-  }
-  else if (window.innerWidth > _parseMinWidth(sv.screenHuge)) {
-    return window.innerWidth;
-  }
+
+  return width;
 }

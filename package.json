@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/use-screen-size",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "Hook used to get the current screen size for responsive behaviour",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -13,7 +13,9 @@
   },
   "type": "module",
   "sideEffects": false,
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "author": "Nicolaos Moscholios <nick@drawbotics.com>",
   "license": "UNLICENSED",
   "scripts": {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import getScreenSize from './get-screen-size';
+import getScreenSize from './get-screen-size.js';
 
 
 const ScreenSizes = {

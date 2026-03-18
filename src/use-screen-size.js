@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore } from 'react';
 
 import getScreenSize from './get-screen-size.js';
 
@@ -12,19 +12,14 @@ const ScreenSizes = {
 };
 
 
+function subscribe(callback) {
+  window.addEventListener('resize', callback);
+  return () => window.removeEventListener('resize', callback);
+}
+
+
 export default function useScreenSize() {
-  const [ size, setSize ] = useState(getScreenSize());
-
-  useEffect(() => {
-    const handleResize = () => {
-      setSize(getScreenSize());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const size = useSyncExternalStore(subscribe, getScreenSize);
 
   return { screenSize: size, ScreenSizes };
 }
